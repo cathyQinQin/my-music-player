@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './index.css';
+import './index.less';
 import AudioControls from '../AudioControls';
 import Backdrop from '../Backdrop';
 const AudioPlayer = ({ tracks}) => {

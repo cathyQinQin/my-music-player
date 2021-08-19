@@ -11,15 +11,15 @@ const View = () => {
       const t : track = {
         title :"1213",
         artist :"1213",
-        audioSrc :"test.mp3",
-        image : "11.jpg",
+        audioSrc :"/test.mp3",
+        image : "/11.jpg",
         color : "1213"
       } 
       const t2 : track = {
         title :"22",
         artist :"33",
-        audioSrc :"222.mp3",
-        image : "11.jpg",
+        audioSrc :"/222.mp3",
+        image : "/11.jpg",
         color : "2222222"
       } 
       const list: any[] = [t,t2];
