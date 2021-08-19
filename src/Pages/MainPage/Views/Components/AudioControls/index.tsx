@@ -1,9 +1,9 @@
 import React from 'react';
-import Play from '@/assets/play.svg';
-import Pause from '@/assets/pause.svg';
-import Next from '@/assets/next.svg';
-import Prev from '@/assets/prev.svg';
-import './AudioControls.styl';
+import Play from './assets/play.svg';
+import Pause from './assets/pause.svg';
+import Next from './assets/next.svg';
+import Prev from './assets/prev.svg';
+import './index.less';
 
 const AudioControls = ({
     isPlaying,
