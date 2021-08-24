@@ -16,5 +16,5 @@
     "jsx": "react-jsx",
     "noImplicitAny": false,
   },
-  "include": ["./src"],
+  "include": ["./src", "actions.ts"],
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import MainView from './Views/'
+import PlayerView from './Views/ PlayerView'
 const MainPage = () => {
     return(
         <div>
-            <MainView/>
+            <PlayerView/>
         </div>
     )
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import AudioPlayer from './Components/AudioPlayer';
+import { useEffect } from 'react';
+import SpotifyWebApi from "spotify-web-api-js";
 const View = () => {
     interface track {
         title: string,
@@ -11,7 +13,7 @@ const View = () => {
       const t : track = {
         title :"1213",
         artist :"1213",
-        audioSrc :"/test.mp3",
+        audioSrc : "/test.mp3",
         image : "/11.jpg",
         color : "1213"
       } 

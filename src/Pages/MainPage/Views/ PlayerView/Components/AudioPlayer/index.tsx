@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import './index.less';
 import AudioControls from '../AudioControls';
 import Backdrop from '../Backdrop';
-const AudioPlayer = ({ tracks}) => {
+import { useSelector } from 'react-redux';
+const AudioPlayer = () => {
+    const tracks: Array<any> = useSelector(state => state.playlists); 
     // State
     const[trackIndex, setTrackIndex] = useState(0);
     const[trackProgress, setTrackProgress] = useState(0);
     const[isPlaying, setIsPlaying] = useState(false);
     // Deconstructure
-    const{ title, artist, audioSrc, image, color } = tracks[trackIndex];
+    const{ title, artist, audioSrc, image } = tracks[trackIndex];
     // Refs
     const audioRef = useRef(new Audio(audioSrc));
     const intervalRef = useRef(0);
@@ -20,6 +22,7 @@ const AudioPlayer = ({ tracks}) => {
     const trackStyling = `
     -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
     `;
+    
     const toPrevTrack = () => {
         if (trackIndex - 1 < 0) {
           setTrackIndex(tracks.length - 1);
@@ -125,7 +128,6 @@ const AudioPlayer = ({ tracks}) => {
             />
             <Backdrop
                 trackIndex={trackIndex}
-                activeColor={color}
                 isPlaying={isPlaying}
             />
         </div>
