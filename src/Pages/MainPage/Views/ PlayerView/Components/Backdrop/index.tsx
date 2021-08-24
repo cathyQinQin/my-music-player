@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import "./index.less"
 const Backdrop = ({
-    activeColor,
     trackIndex,
     isPlaying,
 }) => {
