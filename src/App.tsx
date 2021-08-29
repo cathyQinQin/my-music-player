@@ -11,11 +11,11 @@ import {
 } from "react-router-dom";
 import { setToken, setTokenisNotExpired } from './slices/tokenSlice';
 import { getMyFirstPlayListID, getMyFirstPlayList, setLoading } from './slices/musicListSlice'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 export default function App() {
-    const access_token = useSelector(state => state.token.value)
-    const playlist_id = useSelector(state => state.musicList.id)
-    const playlist = useSelector(state => state.musicList.value)
+    const access_token = useSelector((state: RootStateOrAny) => state.token.value)
+    const playlist_id = useSelector((state: RootStateOrAny) => state.musicList.id)
+    const playlist = useSelector((state: RootStateOrAny) => state.musicList.value)
     const dispatch = useDispatch();
     const handleSaveTokenAndExpiry = () => {
         const [get_token, get_expiry] = SpotifyAPI.saveToken()

@@ -3,18 +3,18 @@ import SpotifyAPI from '../api/SpotifyAPI'
 
 export const getMyFirstPlayListID = createAsyncThunk(
     'music/getMyFirstMusicListID',
-    async(userToken) => {
+    async(userToken:any) => {
         const response = await SpotifyAPI.getMusicListId(userToken)
         return response.items[0].id
     })
 
 export const getMyFirstPlayList = createAsyncThunk(
     'music/getMyFirstMusicList',
-    async(args) => {
+    async(args:any) => {
         const { access_token, playlist_id } = args
         const data = await SpotifyAPI.getMusicList(access_token, playlist_id)
         console.log("data", data)
-        const arraryOfSong = data.tracks.items.map((item) => {
+        const arraryOfSong = data.tracks.items.map((item:any) => {
             return {
                 "id": item.track.uri,
                 "title": item.track.name,
@@ -30,11 +30,11 @@ export const getMyFirstPlayList = createAsyncThunk(
 
 export const getMusicPlayerReady = createAsyncThunk(
         'music/getMyMusicListReady',
-        async(args) => {
+        async(args:any) => {
             const { access_token, playlist_id } = args
             const data = await SpotifyAPI.getMusicList(access_token, playlist_id)
             console.log("data", data)
-            const arraryOfSong = data.tracks.items.map((item) => {
+            const arraryOfSong = data.tracks.items.map((item:any) => {
                 return {
                     "id": item.track.uri,
                     "title": item.track.name,
@@ -48,7 +48,7 @@ export const getMusicPlayerReady = createAsyncThunk(
             return arraryOfSong
         })
     // Define the initial state using that type
-const initialState = {
+const initialState:any = {
     value: [],
     id: "",
     ready: false,

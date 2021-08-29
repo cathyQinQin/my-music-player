@@ -21,18 +21,18 @@ class SpotifyAPI {
 
         const parameters = {
             client_id: "12f43a9e50fc400581ee8d65184b0414",
-            redirect_uri: "http://localhost:3000/callback",
+            redirect_uri: "https://my-spotify-react-player.web.app/callback/",
             scope: scopes.join(" "),
             response_type: "token",
             show_dialog: "true"
         }
-
+        console.log(parameters)
         const url = new URL("https://accounts.spotify.com/authorize")
 
         Object.entries(parameters).forEach(([key, value]) => {
             url.searchParams.append(key, value)
         })
-        location.replace(url)
+        location.replace(url.toString())
     }
     /**
      * save token and expiry seconds to store
@@ -52,7 +52,7 @@ class SpotifyAPI {
         };
         const tokens = getTokenFromUrl();
         console.log(tokens)
-        return [tokens.access_token, tokens.expires_in]
+        return [tokens["access_token"], tokens["expires_in"]]
     }
 
     // return token

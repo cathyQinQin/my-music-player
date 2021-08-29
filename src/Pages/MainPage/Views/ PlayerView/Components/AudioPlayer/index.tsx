@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import './index.less';
 import AudioControls from '../AudioControls';
 import Backdrop from '../Backdrop';
-import { useSelector } from 'react-redux';
+import { useSelector, RootStateOrAny } from 'react-redux';
 const AudioPlayer = () => {
-    const tracks: Array<any> = useSelector(state => state.musicList.value); 
+    const tracks: Array<any> = useSelector((state: RootStateOrAny) => state.musicList.value); 
     // State
     const[trackIndex, setTrackIndex] = useState(0);
     const[trackProgress, setTrackProgress] = useState(0);
@@ -13,7 +13,7 @@ const AudioPlayer = () => {
     const{ title, artist, audioSrc, image } = tracks[trackIndex];
     // Refs
     const audioRef = useRef(new Audio(audioSrc));
-    const intervalRef = useRef(0);
+    const intervalRef:any = useRef();
     const isReady = useRef(false);
     // Deconstructure again
     const{ duration } = audioRef.current;

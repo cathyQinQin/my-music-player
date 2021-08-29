@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 import "./index.less";
 import SpotifyAPI from "../../../api/SpotifyAPI";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, RootStateOrAny } from "react-redux";
 const Login = () => {
-    const loading = useSelector(state => state.musicList.loading)
+    const loading = useSelector((state: RootStateOrAny) => state.musicList.loading)
     // const dispatch = useDispatch();
     const handleClick = () => {
         SpotifyAPI.redirectToOAuth()
