@@ -2,15 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import { reducer, initialState}  from '../reducer'
+import store from './app/store'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-const store = createStore(reducer, initialState)
-//
-import {
-  setUser,
-  setToken,
-} from '../actions'
+import SpotifyPlayer from './SpotifyPlayer'
+import { BrowserRouter } from "react-router-dom";
+// initialize spotify player from script
+SpotifyPlayer.install()
 
 // 打印初始状态
 console.log(store.getState())
@@ -19,18 +16,17 @@ console.log(store.getState())
 // 注意 subscribe() 返回一个函数用来注销监听器
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
-// 发起一系列 action
-store.dispatch(setUser('Learn about actions'))
-store.dispatch(setToken('Learn about reducers'))
 // Safe to add dispatch to the dependencies array
 
 // 停止监听 state 更新
 // unsubscribe()
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
 )

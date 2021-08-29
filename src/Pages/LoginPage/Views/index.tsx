@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./index.less";
-import { loginConfig } from '../../../../spotify'
+import SpotifyAPI from "../../../api/SpotifyAPI";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 const Login = () => {
-    const loading = useSelector(state => state.loading);
+    const loading = useSelector(state => state.musicList.loading)
+    // const dispatch = useDispatch();
+    const handleClick = () => {
+        SpotifyAPI.redirectToOAuth()
+    }
+    let location = useLocation();
+    useEffect(() => {
+        console.log(location);
+    }, [location]);
+    // SpotifyAPI.saveToken(dispatch, setToken, setExpiry);
     return (
         <div className='login'>
             <img
@@ -11,18 +22,12 @@ const Login = () => {
                 alt="Spotify logo"
                 className="logo"
             />
-            {loading 
+            { loading 
             ?
-            <button className="login-btn" disabled>Loading...</button> 
+            <button className="login-btn" disabled>Loading...</button>
             :
-            <form action={loginConfig.url} method="GET">
-                {Object.entries(loginConfig.parameters).map(([key,value])=> (
-                    <input key={key} type="hidden" name={key} value={value}/>
-                ))}
-                <button className="login-btn">LOGIN WITH SPOTIFY</button>
-            </form>
+            <button className="login-btn" onClick={handleClick}>LOGIN WITH SPOTIFY</button>
             }
-            
         </div>
     );
 }

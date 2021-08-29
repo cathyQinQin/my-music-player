@@ -1,38 +1,58 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainPage from './Pages/MainPage';
 import LoginPage from './Pages/LoginPage/Views';
-import { getTokenFromUrl, getTokenAndPlayListId, getPlayListSongInfo } from "../spotify";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import SpotifyWebApi from "spotify-web-api-js";
+import SpotifyAPI from './api/SpotifyAPI';
+import SpotifyPlayer from './SpotifyPlayer';
 import {
-  setUser,
-  setToken,
-  setPlaylists,
-  setPlaylistsId,
-  setLoading,
-} from '../actions'
-
-function App() {
-    const dispatch: any = useDispatch();
-    const token = useSelector(state => state.token);
-    const playlists = useSelector(state => state.playlists);
-    const playlistsId = useSelector(state => state.playlistsId);
-    const spotify = new SpotifyWebApi();
-
-    useEffect(() => {
-        getTokenAndPlayListId({spotify, dispatch, setToken, setPlaylistsId, setLoading});
-    }, []);
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+import { setToken, setTokenisNotExpired } from './slices/tokenSlice';
+import { getMyFirstPlayListID, getMyFirstPlayList, setLoading } from './slices/musicListSlice'
+import { useDispatch, useSelector } from 'react-redux';
+export default function App() {
+    const access_token = useSelector(state => state.token.value)
+    const playlist_id = useSelector(state => state.musicList.id)
+    const playlist = useSelector(state => state.musicList.value)
+    const dispatch = useDispatch();
+    const handleSaveTokenAndExpiry = () => {
+        const [get_token, get_expiry] = SpotifyAPI.saveToken()
+        dispatch(setToken(get_token))
+        dispatch(setTokenisNotExpired())
+        dispatch(setLoading())
+    }
+    // const a = SpotifyAPI.getMusicListId("")
     useEffect(()=>{
-        getPlayListSongInfo({spotify, playlistsId, dispatch, setPlaylists});
-    },[playlistsId]);
-    
+        dispatch(getMyFirstPlayListID(access_token))
+    },[access_token])
+    useEffect(()=>{
+        dispatch(getMyFirstPlayList({ access_token,playlist_id }))
+    },[playlist_id])
+    // useEffect(()=>{
+    //     SpotifyPlayer.getPlayer(access_token)
+    // },[playlist])
     return (
-        <div className="App">
-        { playlists.length == 0 ? <LoginPage/> : <MainPage/> }
-        </div>
+        <div>
+            {/* A <Switch> looks through its children <Route>s and
+                    renders the first one that matches the current URL. */}
+            <Switch>
+                <Route path="/login">
+                    <LoginPage />
+                </Route>
+                <Route path='/callback'
+                    render={() => {
+                        handleSaveTokenAndExpiry()
+                        return (
+                            <Redirect to="/" />
+                        )
+                    }}>
+                </Route>
+                <Route path="/">
+                    {playlist.length != 0 ? <MainPage /> : <LoginPage />}
+                </Route>
+            </Switch>
+        </div >
     );
 }
-
-export default App;

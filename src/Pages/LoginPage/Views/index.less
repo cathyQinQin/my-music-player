@@ -22,22 +22,15 @@
  * animation bg-pan-left
  * ----------------------------------------
  */
- @-webkit-keyframes bg-pan-left {
+
+@keyframes bg-pan-left {
     0% {
-      background-position: 100% 50%;
+        background-position: 0% 100%;
     }
     100% {
-      background-position: 0% 50%;
+        background-position: 100% 70%;
     }
-  }
-  @keyframes bg-pan-left {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+}
      
 .login {
     background-image: url(./gradientaBackGround.jpg);
@@ -55,27 +48,55 @@
     .logo{
       width: 300px;
     }
-    .login-btn{
-      color: #616467;
-      box-shadow: inset 0 0 0 2px #616467;
-      background-color: transparent;
-      border-radius: 500px;
-      font-size: 14px;
-      line-height: 1;
-      letter-spacing: 2px;
-      width: 220px;
-      padding: 16px 14px 18px;
-      margin-top: 50px;
-      font-weight: 700;
-      transition-property: background-color,color;
-      transition-duration: .3s;
+    // .input-area-container {
+    //     display: flex;
+    //     flex-direction: column;
+    //     margin-top: 50px;
+    //     align-items: center;
+    //     .input-container {
+    //         display: flex;
+    //         margin-bottom: 20px;
+    //         .input-scale {
+    //             margin-right: 10px;
+    //             padding: 16px 14px 18px ;
+    //             border-radius: 500px;
+    //             border: 1px solid #616467;
+    //             background-color: transparent;
+    //             width: 400px;
+    //             color: #616467;
+    //             &:focus {
+    //                 outline: none;
+    //             }
+    //         }
+    //     }
+    // }
+    .login-btn {
+        margin-top: 50px;
+        color: #616467;
+        box-shadow: inset 0 0 0 2px #616467;
+        background-color: transparent;
+        border-radius: 500px;
+        font-size: 14px;
+        line-height: 1;
+        letter-spacing: 2px;
+        padding: 16px 14px 18px;
+        font-weight: 700;
+        transition-property: background-color,color;
+        transition-duration: .3s;
+        max-width: 300px;
+        &:hover {
+            color: #fff;
+            background-color: #616467;
+          }
     }
-
-    .login-btn:hover {
-      color: #fff;
-      background-color: #616467;
-    }
-
+    // .btn-focus-green:hover{
+    //     background-color: green;
+    //     box-shadow: none;
+    // }
+    // .btn-border{
+    //     border: 1px solid #616467;
+    //     box-shadow: none;
+    // }
 
 }
 
