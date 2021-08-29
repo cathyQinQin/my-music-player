@@ -4,7 +4,7 @@ import AudioControls from '../AudioControls';
 import Backdrop from '../Backdrop';
 import { useSelector } from 'react-redux';
 const AudioPlayer = () => {
-    const tracks: Array<any> = useSelector(state => state.playlists); 
+    const tracks: Array<any> = useSelector(state => state.musicList.value); 
     // State
     const[trackIndex, setTrackIndex] = useState(0);
     const[trackProgress, setTrackProgress] = useState(0);
