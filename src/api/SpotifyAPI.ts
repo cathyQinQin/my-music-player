@@ -26,7 +26,6 @@ class SpotifyAPI {
             response_type: "token",
             show_dialog: "true"
         }
-        console.log(parameters)
         const url = new URL("https://accounts.spotify.com/authorize")
 
         Object.entries(parameters).forEach(([key, value]) => {
